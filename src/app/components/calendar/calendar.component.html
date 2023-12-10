@@ -1,0 +1,79 @@
+<!-- <div *ngIf="calendarData" class="">
+    <div class="grid grid-cols-5 gap-2  bg-gray-50 p-4">
+
+
+        <div class="h-24 bg-white flex justify-center items-center"   *ngFor="let item of calendarData.days">
+
+            
+            <h1>{{item.day}}</h1>
+        
+        </div>
+    </div>
+
+</div> -->
+<!-- calendar.component.html -->
+
+<!-- calendar.component.html -->
+<div class="">
+  <!-- <div class="flex items-center justify-center py-4">
+    <div class="flex items-center w-">
+      <form (ngSubmit)="submit()">
+        <select
+          name="meuCampo"
+          [(ngModel)]="valorDoCampo"
+          class="px-4 py-2 border rounded-l-md focus:outline-none focus:ring focus:border-blue-300"
+        >
+          <option *ngFor="let mes of meses" [value]="mes.valor">
+            {{ mes.nome }}
+          </option>
+        </select>
+        <button
+          type="submit"
+          class="bg-blue-500 text-white px-4 py-2 rounded-r-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+        >
+          Enviar
+        </button>
+      </form>
+    </div>
+  </div> -->
+  <div *ngIf="calendarData" class="">
+    <h1 class="text-center text-3xl font-bold">
+      {{ calendarData.month | titlecase }}
+      {{ calendarData.updatedAt | date : "MMM dd, yyyy 'as' hh:mm a" }}
+    </h1>
+    <div class="grid grid-cols-5 gap-3 p-4">
+      <div
+        *ngFor="let day of calendarData.days"
+        class="text-center relative h-32 flex flex-col rounded overflow-hidden shadow bg-gray-50"
+      >
+        <div class="font-semibold border-b bg-gray-100 text-red-500 relative">
+          <span>
+            {{ day.weekday.slice(0, 3) }}
+          </span>
+        </div>
+        <div
+          class="text-center flex flex-col justify-center items-center h-full text-2xl font-bold"
+        >
+          <div>{{ day.day | date : "dd" }}</div>
+        </div>
+        <ng-container *ngIf="day.listFunci.length">
+          <span class="text-end absolute left-1 bottom-0 text-gray-400"
+            >Funcis: {{ day.listFunci.length }}</span
+          >
+        </ng-container>
+        <div class="flex absolute right-1 bottom-1 gap-1">
+          <app-register-day
+            [funciId]="'F1234554'"
+            [month]="calendarData.monthIntRef.toString()"
+            [day]="day.day"
+          ></app-register-day>
+          <app-unregister-day
+            [funciId]="'F1234554'"
+            [month]="calendarData.monthIntRef.toString()"
+            [day]="day.day"
+          ></app-unregister-day>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
